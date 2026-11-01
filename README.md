@@ -1,6 +1,6 @@
 # Online Voting System
 
-This is a basic student election project made with HTML, CSS and JavaScript.
+This is a basic student election project made with HTML, CSS, JavaScript and React.
 
 ## Modules
 
