@@ -61,6 +61,11 @@ body {
   color: #d7e8fb;
 }
 
+.topbar .nav-link.active {
+  border-bottom: 2px solid #fff;
+  color: #fff;
+}
+
 .nav-user {
   color: #fff;
   font-size: 14px;
@@ -318,8 +323,16 @@ body {
 }
 
 @media (max-width: 576px) {
+  .topbar {
+    padding: 6px 0;
+  }
+
+  .topbar .container {
+    flex-wrap: wrap;
+  }
+
   .brand {
-    max-width: 150px;
+    max-width: 135px;
     font-size: 17px;
   }
 

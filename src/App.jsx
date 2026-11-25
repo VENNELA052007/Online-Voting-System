@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 const ADMIN_EMAIL = "admin@voting.com";
 const ADMIN_PASSWORD = "admin123";
@@ -44,13 +44,13 @@ function Header({ user, onLogout }) {
           <span>Online Voting</span>
         </Link>
         <nav className="nav-links navbar-nav flex-row" aria-label="Main navigation">
-        {!user && <Link className="nav-link" to="/login">Login</Link>}
-        {!user && <Link className="nav-link" to="/signup">Sign up</Link>}
+        {!user && <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} to="/login">Login</NavLink>}
+        {!user && <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} to="/signup">Sign up</NavLink>}
         {user && (
           <>
-            <Link className="nav-link" to={user.role === "admin" ? "/admin" : "/dashboard"}>
+            <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} to={user.role === "admin" ? "/admin" : "/dashboard"}>
               {user.role === "admin" ? "Admin dashboard" : "My dashboard"}
-            </Link>
+            </NavLink>
             <span className="nav-user">{user.name || "Administrator"}</span>
             <button className="btn button nav-logout" type="button" onClick={onLogout}>Logout</button>
           </>
