@@ -311,23 +311,7 @@ body {
   overflow-x: auto;
 }
 
-.site-footer {
-  padding: 18px 0;
-  border-top: 1px solid #dde4ec;
-  background: #fff;
-}
 
-.site-footer .container {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.site-footer p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-}
 
 .message {
   color: #b02a37;
@@ -373,7 +357,4 @@ body {
     align-items: flex-start;
   }
 
-  .site-footer .container {
-    flex-direction: column;
-  }
 }

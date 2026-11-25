@@ -66,19 +66,7 @@ function Layout({ user, onLogout, children }) {
     <>
       <Header user={user} onLogout={onLogout} />
       {children}
-      <Footer />
     </>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="site-footer">
-      <div className="container">
-        <p>Online Voting System</p>
-        <p>Front-end college project</p>
-      </div>
-    </footer>
   );
 }
 
@@ -143,7 +131,6 @@ function Home() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }
