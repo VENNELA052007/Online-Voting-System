@@ -1,1 +1,4 @@
-Online-Voting-System-Presentation.pptx
+node_modules/
+dist/
+.vite/
+*.local
