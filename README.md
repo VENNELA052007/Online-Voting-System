@@ -56,11 +56,10 @@ Create a production build with `npm run build`.
 
 ## Deploy to GitHub Pages
 
-Pushing to `main` runs the GitHub Actions workflow, which builds the app and
-publishes it to the `gh-pages` branch. To enable the site, open the repository's
-**Settings → Pages**, choose **Deploy from a branch**, select `gh-pages` and
-`/(root)`, then save. The deployed URL is
-`https://<owner>.github.io/<repository>/`.
+The GitHub Actions workflow builds and deploys the app when changes are pushed
+to `main`. In **Settings → Pages**, set the source to **GitHub Actions** once.
+The deployment URL appears in the workflow run and is
+https://vennela052007.github.io/Online-Voting-System/.
 
 ## Demo limitations
 
