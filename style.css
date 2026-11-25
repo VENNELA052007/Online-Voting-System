@@ -16,6 +16,9 @@ body {
 }
 
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
   min-height: 68px;
   padding: 8px 0;
   background: var(--dark-blue);
@@ -370,4 +373,87 @@ body {
     align-items: flex-start;
   }
 
+}
+
+/* ---------- Dashboards: stats, tabs, election cards ---------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  padding: 16px;
+  border: 1px solid #d8dee7;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.stat-card strong {
+  display: block;
+  color: var(--dark-blue);
+  font-size: 28px;
+}
+
+.stat-card span {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tab-bar .nav-link {
+  border: 1px solid #c9d3df;
+  background: #fff;
+  color: var(--dark-blue);
+  font-weight: 600;
+}
+
+.tab-bar .nav-link.active {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #fff;
+}
+
+.election-list {
+  display: grid;
+  gap: 16px;
+}
+
+.election-card {
+  padding: 18px;
+  border: 1px solid #d8dee7;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.election-meta {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.results-box {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #e3e7ed;
+}
+
+.voter-search {
+  max-width: 280px;
+}
+
+.form-card .form-label,
+.panel .form-label {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.panel .button {
+  font-weight: 600;
 }

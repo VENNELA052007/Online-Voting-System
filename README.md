@@ -1,9 +1,50 @@
 # Online Voting System
 
-A responsive front-end student election project built with React, Vite and
-Bootstrap. It includes voter registration, login, candidate selection,
-election status control and an admin dashboard. Demo data is stored in the
-browser's Local Storage.
+A responsive student election app built with React, Vite, React Router and
+Bootstrap. It has a voter module and an admin module. All data is stored in the
+browser's Local Storage, so it needs no backend.
+
+## Features
+
+**Admin module** (login: `admin@voting.com` / `admin123`)
+
+- Elections: create, view, edit, delete, set a voting schedule, close or reopen voting
+- Candidates: add, view, edit and delete candidates for each election
+- Voters: view registered voters, search them, remove a voter
+- Results: monitor votes live (turnout and vote share) and announce the results to voters
+
+**Voter module**
+
+- Sign up (18+ only) and log in
+- Dashboard listing every election with its status and candidates
+- Cast one vote per election, with a vote confirmation
+- Duplicate voting is blocked
+- See the final results once the admin announces them
+
+## React concepts used
+
+- Components and props: `Header`, `Layout`, `ElectionCard`, `ResultBars`, `StatusBadge` and the admin panels
+- `useState` for form fields, tabs, messages and lists
+- `useEffect` for saving to Local Storage, syncing browser tabs, timers and page titles
+- Custom hooks: `useLocalStorage` and `useNow`
+- React Router: `HashRouter`, `Routes`, `NavLink`, `Navigate` and a role-based `ProtectedRoute`
+- Controlled forms, conditional rendering, and lists with keys
+- Lifting state up: `AdminDashboard` owns the data and passes it down as props
+
+## Project structure
+
+```
+src/
+  main.jsx            app entry (router + starting data)
+  App.jsx             routes and the logged-in user
+  pages/              Home, Login, Signup, VoterDashboard, AdminDashboard
+  components/         Header, Layout, ProtectedRoute, ElectionCard, ResultBars, StatusBadge
+  components/admin/   ElectionsPanel, CandidatesPanel, VotersPanel, ResultsPanel
+  hooks/              useLocalStorage, useNow
+  utils/              storage.js (Local Storage), elections.js (status and results)
+```
+
+Local Storage keys: `users`, `currentUser`, `elections`, `candidates`, `votes`.
 
 ## Run locally
 
@@ -13,21 +54,9 @@ browser's Local Storage.
 
 Create a production build with `npm run build`.
 
-## Demo admin account
-
-- Email: `admin@voting.com`
-- Password: `admin123`
-
-## Deploy to Vercel
-
-Commit and push the project to GitHub, then import the repository into Vercel.
-Vercel detects Vite automatically. Use `npm run build` as the build command and
-`dist` as the output directory. The included `vercel.json` sends app routes to
-the React entry point.
-
 ## Demo limitations
 
 This project is for classroom demonstration, not real elections. Local Storage
-is specific to a browser and device, and account passwords are not securely
-stored. A real election needs a trusted backend, secure authentication,
-authorization, and tamper-resistant vote storage.
+is specific to one browser and device, and passwords are not securely stored. A
+real election needs a trusted backend, secure authentication, authorization and
+tamper-resistant vote storage.

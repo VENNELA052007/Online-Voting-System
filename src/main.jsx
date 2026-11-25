@@ -3,7 +3,10 @@ import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App.jsx";
+import { initializeData } from "./utils/storage";
 import "../style.css";
+
+initializeData();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
