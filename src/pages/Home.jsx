@@ -19,7 +19,8 @@ export default function Home() {
               <h1>Make your vote count.</h1>
               <p>A simple and fair way to take part in our college student election.</p>
               <div className="button-row d-flex flex-wrap gap-2">
-                <Link className="btn btn-primary button" to="/login">Login</Link>
+                <Link className="btn btn-primary button" to="/login/user">Voter login</Link>
+                <Link className="btn btn-outline-primary button" to="/login/admin">Admin login</Link>
                 <Link className="btn btn-success button secondary" to="/signup">Create voter account</Link>
               </div>
             </div>

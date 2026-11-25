@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 // Otherwise sends the visitor to the login page.
 export default function ProtectedRoute({ user, role, children }) {
   if (!user || user.role !== role) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to={role === "admin" ? "/login/admin" : "/login/user"} replace />;
   }
   return children;
 }

@@ -42,7 +42,7 @@ export default function Signup() {
 
     // CREATE: save the new voter in Local Storage
     writeData("users", [...users, { name, dob: form.dob, email, password: form.password }]);
-    navigate("/login", { state: { message: "Signup successful. You can now log in." } });
+    navigate("/login/user", { state: { message: "Signup successful. You can now log in." } });
   }
 
   return (
@@ -69,7 +69,7 @@ export default function Signup() {
         {error && <div className="alert alert-danger mt-3" role="alert">{error}</div>}
         <button className="btn btn-primary button" type="submit">Create account</button>
         <p className="small-text form-footnote">
-          Already registered? <Link to="/login">Login</Link>
+          Already registered? <Link to="/login/user">Voter login</Link>
         </p>
       </form>
     </main>

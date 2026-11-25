@@ -12,6 +12,29 @@ export function formatDateTime(value) {
   return new Date(value).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
 }
 
+export function formatTimeLeft(ms) {
+  const totalMinutes = Math.floor(ms / 60000);
+  if (totalMinutes < 1) return "less than 1 minute";
+
+  const days = Math.floor(totalMinutes / 1440);
+  if (days >= 1) return `${days}d ${Math.floor((totalMinutes % 1440) / 60)}h`;
+
+  const hours = Math.floor(totalMinutes / 60);
+  if (hours >= 1) return `${hours}h ${totalMinutes % 60}m`;
+
+  return `${totalMinutes}m`;
+}
+
+export function getCountdownText(election, status, now) {
+  if (status === "Open") {
+    return `Closes in ${formatTimeLeft(new Date(election.endTime) - now)}`;
+  }
+  if (status === "Upcoming") {
+    return `Starts in ${formatTimeLeft(new Date(election.startTime) - now)}`;
+  }
+  return null;
+}
+
 // Counts the votes of every candidate in one election.
 export function getResults(electionId, candidates, votes) {
   const electionVotes = votes.filter((vote) => vote.electionId === electionId);

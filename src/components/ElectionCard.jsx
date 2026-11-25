@@ -1,26 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StatusBadge from "./StatusBadge";
 import ResultBars from "./ResultBars";
-import { formatDateTime } from "../utils/elections";
+import { formatDateTime, getCountdownText } from "../utils/elections";
 
 // One election as the voter sees it: details, candidates, vote form, confirmation.
-export default function ElectionCard({ election, status, candidates, myVote, results, onVote }) {
+export default function ElectionCard({ election, status, now, candidates, myVote, results, onVote }) {
   const [selectedId, setSelectedId] = useState(null);
+  const [confirming, setConfirming] = useState(false);
 
   const canVote = status === "Open" && !myVote;
   const votedCandidate = myVote ? candidates.find((c) => c.id === myVote.candidateId) : null;
+  const selectedCandidate = candidates.find((candidate) => candidate.id === selectedId);
+  const countdownText = getCountdownText(election, status, now);
+  const countdownTarget = status === "Open" ? election.endTime : election.startTime;
+  const countdownNeedsWarning = countdownText && new Date(countdownTarget) - now < 60 * 60 * 1000;
+
+  useEffect(() => {
+    if (!confirming) return undefined;
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") setConfirming(false);
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [confirming]);
+
+  useEffect(() => {
+    if (!canVote) setConfirming(false);
+  }, [canVote]);
 
   function handleSubmit(event) {
     event.preventDefault();
     if (selectedId === null) return;
-    onVote(election.id, selectedId);
+    setConfirming(true);
   }
 
   return (
     <article className="election-card" aria-label={election.title}>
       <div className="d-flex justify-content-between align-items-start gap-2 flex-wrap">
         <h2 className="h4 mb-1">{election.title}</h2>
-        <StatusBadge status={status} />
+        <div className="d-flex align-items-center gap-2 flex-wrap">
+          <StatusBadge status={status} />
+          {countdownText && (
+            <small className={countdownNeedsWarning ? "text-warning-emphasis" : "text-secondary"}>
+              {countdownText}
+            </small>
+          )}
+        </div>
       </div>
       {election.description && <p className="mb-1">{election.description}</p>}
       <p className="election-meta">
@@ -84,6 +111,61 @@ export default function ElectionCard({ election, status, candidates, myVote, res
           <h3 className="h5">Final results</h3>
           <ResultBars results={results} announced />
         </div>
+      )}
+
+      {confirming && canVote && selectedCandidate && (
+        <>
+          <div className="modal-backdrop fade show"></div>
+          <div
+            className="modal d-block"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={`vote-confirm-title-${election.id}`}
+            tabIndex="-1"
+          >
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h2 className="modal-title fs-5" id={`vote-confirm-title-${election.id}`}>
+                    Confirm your vote
+                  </h2>
+                  <button
+                    className="btn-close"
+                    type="button"
+                    aria-label="Cancel"
+                    onClick={() => setConfirming(false)}
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <p>
+                    You are voting for <strong>{selectedCandidate.name}</strong> ({selectedCandidate.party})
+                    in <strong>{election.title}</strong>.
+                  </p>
+                  <p className="mb-0">You cannot change your vote after confirming.</p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={() => setConfirming(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={() => {
+                      onVote(election.id, selectedId);
+                      setConfirming(false);
+                    }}
+                  >
+                    Confirm vote
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </article>
   );

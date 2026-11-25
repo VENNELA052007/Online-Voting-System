@@ -23,7 +23,15 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="/login"
-          element={user ? <Navigate to={dashboardPath} replace /> : <Login onLogin={setUser} />}
+          element={<Navigate to={user ? dashboardPath : "/login/user"} replace />}
+        />
+        <Route
+          path="/login/user"
+          element={user ? <Navigate to={dashboardPath} replace /> : <Login role="user" onLogin={setUser} />}
+        />
+        <Route
+          path="/login/admin"
+          element={user ? <Navigate to={dashboardPath} replace /> : <Login role="admin" onLogin={setUser} />}
         />
         <Route
           path="/signup"

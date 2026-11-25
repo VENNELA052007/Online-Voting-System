@@ -16,7 +16,8 @@ export default function Header({ user, onLogout }) {
           <span>Online Voting</span>
         </Link>
         <nav className="nav-links navbar-nav flex-row" aria-label="Main navigation">
-          {!user && <NavLink className={navClass} to="/login">Login</NavLink>}
+          {!user && <NavLink className={navClass} to="/login/user">Voter login</NavLink>}
+          {!user && <NavLink className={navClass} to="/login/admin">Admin login</NavLink>}
           {!user && <NavLink className={navClass} to="/signup">Sign up</NavLink>}
           {user && (
             <>

@@ -56,10 +56,10 @@ Create a production build with `npm run build`.
 
 ## Deploy to GitHub Pages
 
-The GitHub Actions workflow publishes the production build to the `gh-pages`
-branch whenever `main` is updated. In the repository's **Settings → Pages**,
-set the source to **Deploy from a branch**, select `gh-pages` and `/(root)`,
-then save. This setup is required once for a new repository.
+Pushing to `main` runs the GitHub Actions workflow, which builds the app and
+publishes it to the `gh-pages` branch. The workflow configures GitHub Pages to
+serve that branch automatically. The deployed URL is
+`https://<owner>.github.io/<repository>/`.
 
 ## Demo limitations
 
